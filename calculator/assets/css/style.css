@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+ width: 400px;
+}
+
+.numbers{
+    margin: 50px;
+    display:space-between;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons button{
+    margin: 20px;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+
+.result-section{
+    margin: 20px;
+}
