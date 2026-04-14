@@ -30,6 +30,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     cursor: pointer;
+    margin-bottom: 0;
 }
 
 img{
@@ -37,12 +38,16 @@ img{
     height: 20px;
 }
 
-.lang-button{
-    width: 60px;
+.buttons-lang-button{
+    width: 70px;
     height: 28px;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    font-style: normal !important;
     background-color: black;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    margin: auto 0;
 }
 
 .buttons{
@@ -60,34 +65,8 @@ button{
     padding: 5px 10px;
 }
 
-.card button{
-    border: 2px solid black;
-}
-
-#basket-btn{
-    padding:0;
-}
-
-#cards{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-}
-
-.card{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    width: 300px;
-    height: 400px;
-}
-
-.coffee-img{
-    width: 100%;
-    height: 200px;
+.item-img{
+    width: 50px;
+    height: 50px;
     object-fit: cover;
 }
