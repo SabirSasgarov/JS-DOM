@@ -27,7 +27,8 @@ for (let i = 0; i < addButtons.length; i++) {
 
         let img = card.querySelector("img").src;
         let title = card.querySelector("h2").innerText;
-        let price = card.querySelector("p").innerText;
+        let price = card.querySelector(".card-price").innerText;
+        let description = card.querySelector("p").innerText;
         
         let count = Count(title);
         if (count > 0) {
@@ -45,7 +46,7 @@ for (let i = 0; i < addButtons.length; i++) {
             return;
         }
         let data = JSON.parse(localStorage.getItem("myArray")) || [];
-        let newItem = JSON.stringify({ title, price, img, count: count + 1 });
+        let newItem = JSON.stringify({ title, description, price, img, count: count + 1 });
         data.push(newItem);
         localStorage.setItem("myArray", JSON.stringify(data));
 

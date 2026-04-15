@@ -3,53 +3,72 @@ goBackButton.addEventListener("click", function () {
     window.location.href = "index.html";
 });
 
+
+function emptyList(){
+    let listContainer = document.getElementById("list-container");
+    listContainer.innerHTML = "<p style='color: #6c757d; font-size: 1.25rem; text-align: center; margin: 0;'>Your basket is empty!</p>";
+}
+
 function updateList() {
     let data = JSON.parse(localStorage.getItem("myArray")) || [];
     let listContainer = document.getElementById("list-container");
     //listContainer.innerHTML = "";
+
+    if(data.length === 0){
+        emptyList();
+        return;
+    }
+
     for (let i = 0; i < data.length; i++) {
         let item = JSON.parse(data[i]);
-        //let listItem = document.createElement("div");
-        // listItem.classList.add("list-item");
-        
-        let image = document.querySelector(".item-img");
-        console.log(image);
-        image.src = item.img;
-        image.alt = item.title;
-        let name = document.querySelector(".item-name");
-        name.textContent = item.title;
-        let count = document.querySelector(".item-count");
-        count.textContent = item.count;
-        
+        let listItem = document.createElement("div");
+        listItem.classList.add("list-item");
 
-        // listItem.innerHTML = `
-        //     <img src="${item.img}" alt="${item.title}" class="item-image"> 
-        //     <div class="item-details">
-        //         <p>${item.price}</p>
-        //         <p>Count: ${item.count}</p>
-        //     </div>  
-        // `;
-     //   listContainer.appendChild(listItem);
+        listItem.innerHTML = `
+            <div class="item-image-container">
+                <img src="${item.img}" alt="${item.title}" class="item-image "> 
+            </div>
+            <div class="item-details">
+                <h2>${item.title}</h2>
+                <p>${item.description}</p>
+                <p class="item-price">${item.price}</p>
+            </div> 
+            <div class="item-count badge text-bg-primary rounded-pill">
+                <p>${item.count}</p>
+            </div> 
+        `;
+        if(i==data.length-1){
+            listItem.style.borderBottom = "none";
+        }
+       listContainer.appendChild(listItem);
     }
 }
 
 updateList();
 
-        //  <li
-        //     class="list-group-item d-flex justify-content-between align-items-start"
-        //   >
-        //     <div>
-        //       <img src="./assets/images/c1.avif" alt="" class="item-img m-2" />
-        //     </div>
-        //     <div class="ms-2 me-auto">
-        //       <div class="fw-bold item-name">Subheading</div>
-        //       Content for list item
-        //     </div>
-        //     <span class="badge text-bg-primary rounded-pill item-count"
-        //       >14</span
-        //     >
-        //   </li>
 
+let clearListButton = document.getElementById("clear-btn");
+clearListButton.addEventListener("click", function () {
+    if(!localStorage.getItem("myArray")){
+        alert("Your basket is already empty!");
+        return;
+    }
+    localStorage.removeItem("myArray");
+    let listContainer = document.getElementById("list-container");
+    listContainer.innerHTML = "";
+    emptyList();
+});
 
-
+let checkoutButton = document.getElementById("checkout-btn");
+checkoutButton.addEventListener("click", function () {
+    if(!localStorage.getItem("myArray")){
+        alert("Your basket is empty!");
+        return;
+    }
+    alert("Thank you for your purchase!");
+    localStorage.removeItem("myArray");
+    let listContainer = document.getElementById("list-container");
+    listContainer.innerHTML = "";
+    emptyList();
+});
 
