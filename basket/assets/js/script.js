@@ -60,7 +60,3 @@ basketButton.addEventListener("click", function () {
     window.location.href = "basket.html";
 });
 
-
-
-
-

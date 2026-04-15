@@ -44,10 +44,10 @@ img{
     font-size: 14px !important;
     font-weight: normal !important;
     font-style: normal !important;
+    margin-top: 6px;
     background-color: black;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    margin: auto 0;
 }
 
 .buttons{
@@ -117,4 +117,25 @@ button{
 
 .item-price, .item-details p, .item-details h2{
     margin: 0;
+}
+
+
+.buttons-container{
+    margin-right: 50px;
+    align-items: end;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.total-cost-div{
+    width: 205px !important;
+}
+
+.total-cost-div h4{
+    margin: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #efeeeb;
 }

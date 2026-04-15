@@ -7,12 +7,14 @@ goBackButton.addEventListener("click", function () {
 function emptyList(){
     let listContainer = document.getElementById("list-container");
     listContainer.innerHTML = "<p style='color: #6c757d; font-size: 1.25rem; text-align: center; margin: 0;'>Your basket is empty!</p>";
+    let totalCostElement = document.getElementById("total-cost");
+    totalCostElement.innerText = "0.00";
 }
 
 function updateList() {
     let data = JSON.parse(localStorage.getItem("myArray")) || [];
     let listContainer = document.getElementById("list-container");
-    //listContainer.innerHTML = "";
+    listContainer.innerHTML = "";
 
     if(data.length === 0){
         emptyList();
@@ -25,6 +27,9 @@ function updateList() {
         listItem.classList.add("list-item");
 
         listItem.innerHTML = `
+            <div>
+                <img src="./assets/images/delete-2-svgrepo-com.svg" alt="Remove Item" class="remove-item" style="cursor: pointer; width: 20px; height: 20px;">
+            </div>
             <div class="item-image-container">
                 <img src="${item.img}" alt="${item.title}" class="item-image "> 
             </div>
@@ -41,11 +46,29 @@ function updateList() {
             listItem.style.borderBottom = "none";
         }
        listContainer.appendChild(listItem);
+       
+    }
+}
+
+function attachRemoveListeners() {
+    let removeButtons = document.querySelectorAll(".remove-item");
+    for (let i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].addEventListener("click", function () {
+            console.log("Remove button clicked for item index: " + i);
+            let data = JSON.parse(localStorage.getItem("myArray")) || [];
+            data.splice(i, 1);
+            localStorage.setItem("myArray", JSON.stringify(data));
+            updateList();
+            attachRemoveListeners();
+            let totalCostElement = document.getElementById("total-cost");
+            totalCostElement.innerText = `${totalCost()}`;
+        }
+        );
     }
 }
 
 updateList();
-
+attachRemoveListeners();
 
 let clearListButton = document.getElementById("clear-btn");
 clearListButton.addEventListener("click", function () {
@@ -71,4 +94,23 @@ checkoutButton.addEventListener("click", function () {
     listContainer.innerHTML = "";
     emptyList();
 });
+
+
+
+function totalCost(){
+    let data = JSON.parse(localStorage.getItem("myArray")) || [];
+    let total = 0;
+    for (let i = 0; i < data.length; i++) {
+        let item = JSON.parse(data[i]);
+        let price = parseFloat(item.price.replace("$", ""));
+        total += price * item.count;
+    }
+    return total.toFixed(2);
+}
+
+let totalCostElement = document.getElementById("total-cost");
+totalCostElement.innerText = `${totalCost()}`;
+
+
+
 
